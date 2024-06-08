@@ -60,3 +60,5 @@ const analyzeGrades = () => {
 };
 
 document.getElementById("btn").addEventListener("click", analyzeGrades);
+
+document.getElementById("btn-reset").addEventListener("click", () => location.reload());
