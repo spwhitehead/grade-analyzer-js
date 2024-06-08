@@ -1,4 +1,14 @@
-input = [65, 88, 34, 100, 98, 97, 89, 43, 70, 77, 90]
+const getArray = () => {
+    const numString = prompt("Enter grades separated by commas (e.g. 67, 45, 98):");
+    const numArrayAsStrings = numString.split(",");
+    const numArray = numArrayAsStrings.map(convertToNumber);
+    return numArray;
+};
+
+const convertToNumber = (stringNumber) => parseInt(stringNumber.trim());
+
+
+let input = getArray();
 
 let gradeAnalysis = {};
 
@@ -23,7 +33,7 @@ const highestScore = (input) => {
 };
 
 const lowestScore = (input) => {
-    let min = Math.min(input);
+    let min = Math.min(...input);
     gradeAnalysis.lowest = min;
 };
 
@@ -35,9 +45,18 @@ const passingScore = (input) => {
     }
 };
 
-totalPoints(input);
-avgScore(input);
-highestScore(input);
-lowestScore(input);
-passingScore(input);
-console.log(gradeAnalysis);
+const analyzeGrades = () => {
+    totalPoints(input);
+    avgScore(input);
+    highestScore(input);
+    lowestScore(input);
+    passingScore(input);
+    console.log(gradeAnalysis);
+    document.getElementById("output").innerHTML = "";
+    for (let item in gradeAnalysis) {
+        document.getElementById("output").innerHTML +=
+        "<p>" + item + ": " + gradeAnalysis[item] + "</p>"; 
+    }
+};
+
+document.getElementById("btn").addEventListener("click", analyzeGrades);
